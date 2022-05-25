@@ -12,3 +12,9 @@ def test_nsm_library_init():
 
 if __name__ == "__main__":
     test_nsm_library_init()
+
+    # To connect to the enclave console, need to keep the process running
+    import time
+    while True:
+        time.sleep(1)
+        print('.', end='', flush=True)
