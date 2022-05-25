@@ -1,6 +1,6 @@
 # Copyright (c) Meta, Inc. and its affiliates.
 
-import gateway.nsm as nsm
+import nsm
 
 
 def test_nsm_library_init():
@@ -8,3 +8,7 @@ def test_nsm_library_init():
     gateway = nsm.NitroGateway()
     # assert is not needed but prevents 'unused variable'
     assert gateway
+    print("Nitro gateway created") # output for testing in local Docker image
+
+if __name__ == "__main__":
+    test_nsm_library_init()

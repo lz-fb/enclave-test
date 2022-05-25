@@ -7,4 +7,4 @@ COPY gateway .
 COPY service .
 COPY test .
 
-CMD ["python3", "test/test_nsm.py"]
+CMD ["python3", "test_nsm.py"]
