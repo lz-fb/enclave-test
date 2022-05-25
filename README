@@ -1,0 +1,27 @@
+
+## Testing NSM library integration ##
+
+1. Build the image:
+
+docker build -f container/Dockerfile -t enclave .
+
+
+2. To run outside the enclave:
+
+docker run enclave
+
+2a. Should print "Nitro gateway created!"
+
+
+3. To run inside the enclave:
+
+nitro-cli build-enclave --docker-uri enclave --output-file enclave.eif
+nitro-cli run-enclave --eif-path enclave.eif --memory 2048 --cpu-count 2 --debug-mode
+
+3a. Connect to enclave process
+
+ENCLAVE_ID=$(nitro-cli describe-enclaves | jq -r .[0].EnclaveID)
+nitro-cli console --enclave-id $ENCLAVE_ID
+
+3b. Should print "Nitro gateway created!"
+
