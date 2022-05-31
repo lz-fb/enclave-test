@@ -9,4 +9,4 @@ COPY gateway .
 COPY service .
 COPY test .
 
-CMD ["run_tests.sh"]
+CMD ["python3", "run_tests.py"]
