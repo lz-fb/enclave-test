@@ -1,6 +1,6 @@
 # Copyright (c) Meta, Inc. and its affiliates.
 
-import libnsm
+from . import libnsm
 
 
 class NitroGateway:

@@ -1,24 +1,42 @@
 # Copyright (c) Meta, Inc. and its affiliates.
 
-from rsa_key import RSAKeyPair
+from enum import Enum
+
+from Crypto.PublicKey import RSA
+from entity.key_pair_details import KeyPairDetails
+
+
+class KeyAlgorithm(Enum):
+    # For now we only support RSA since it is one of the most common algorithms, will add more key algorithms in the future
+    RSA = "RSA"
 
 
 class KeyManagementService:
     """Key management service for enclave process"""
 
-    keyPair: RSAKeyPair
+    keyPair: KeyPairDetails
 
-    def __init__(self):
-        pass
+    def __init__(self, key_alg: KeyAlgorithm = KeyAlgorithm.RSA, key_size: int = 4096):
+        """Upon initialization generates a key pair. Currently only supports RSA."""
+        self.keyPair = self._generate_key_pair(key_alg, key_size)
 
-    def generate_key_pair(self) -> None:
-        """Generates a key pair of 2048 bits"""
-        self.keyPair = RSAKeyPair(2048)
+    def _generate_key_pair(
+        self, key_alg: KeyAlgorithm, key_size: int
+    ) -> KeyPairDetails:
+        if key_alg == KeyAlgorithm.RSA:
+            private_key = RSA.generate(key_size)
+            public_key = private_key.publickey()
+            return KeyPairDetails(
+                private_key.export_key("PEM"),
+                public_key.export_key("PEM"),
+            )
+        else:
+            raise NotImplementedError
 
     def get_public_key(self) -> bytes:
-        """Returns public key as DER format"""
-        return self.keyPair.get_public_key()
+        """Returns public key as PEM format"""
+        return self.keyPair.public_key_pem()
 
     def get_private_key(self) -> bytes:
-        """Returns private key as DER format"""
-        return self.keyPair.get_private_key()
+        """Returns private key as PEM format"""
+        return self.keyPair.private_key_pem()

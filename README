@@ -1,5 +1,18 @@
+#### Testing NSM library integration ####
 
-## Testing NSM library integration ##
+## Make NSM wrapper runnable in Docker image both outside and inside the Nitro Enclave ##
+
+The Dockerfile will run the test_nsm.py script, which loads and initializes the Nitro Secure Module library (libnsm.so).
+
+The NSM library is originally for Rust, and was modified by Luc van Donkersgoed to be compatible with python.
+This example uses the compiled NSM library (libnsm.so) from Richard Fan's python example.
+https://github.com/richardfan1126/nitro-enclave-python-demo/tree/master/attestation_verifier
+
+The original and most current NSM library is from AWS.
+https://github.com/aws/aws-nitro-enclaves-nsm-api
+
+
+## Steps to build and run the example ##
 
 1. Build the image:
 
@@ -10,7 +23,7 @@ docker build -f container/Dockerfile -t enclave .
 
 docker run enclave
 
-2a. Should print "Nitro gateway created!"
+2a. Should print "Nitro gateway created"
 
 
 3. To run inside the enclave:
@@ -23,5 +36,4 @@ nitro-cli run-enclave --eif-path enclave.eif --memory 2048 --cpu-count 2 --debug
 ENCLAVE_ID=$(nitro-cli describe-enclaves | jq -r .[0].EnclaveID)
 nitro-cli console --enclave-id $ENCLAVE_ID
 
-3b. Should print "Nitro gateway created!"
-
+3b. Should print "Nitro gateway created"

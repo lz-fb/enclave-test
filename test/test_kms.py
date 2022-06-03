@@ -1,22 +1,19 @@
 # Copyright (c) Meta, Inc. and its affiliates.
 
-import key_management
-import onedocker_runner
+from service.key_management import KeyManagementService
 
 
-def test_kms_onedocker_init():
-    """Tests whether Onedocker service can initialize using a KMS"""
-    kms = key_management.KeyManagementService()
-    runner = onedocker_runner.OneDockerRunnerService(kms)
-    # assert is not needed but prevents 'unused variable'
-    assert runner
+def test_kms_create_rsa():
+    """Tests whether KMS can create an RSA keypair"""
+    kms = KeyManagementService(key_size=2048)
+    assert kms
 
     # output for testing in local Docker image
-    print("Onedocker runner service created")
+    print("KMS and keypair created")
 
 
 if __name__ == "__main__":
-    test_kms_onedocker_init()
+    test_kms_create_rsa()
 
     # To connect to the enclave console, need to keep the process running
     import time

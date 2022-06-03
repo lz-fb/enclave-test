@@ -1,8 +1,6 @@
 # Copyright (c) Meta, Inc. and its affiliates.
 
-from Crypto.Cipher import PKCS1_OAEP
-
-from key_management import KeyManagementService
+from service.key_management import KeyManagementService
 
 
 class OneDockerRunnerService:
@@ -24,6 +22,4 @@ class OneDockerRunnerService:
 
     def decrypt_data(self, data: bytes) -> bytes:
         """Decrypt data"""
-        cipher = PKCS1_OAEP.new(self.kms.get_private_key())
-        plaintext = cipher.decrypt(data)
-        return plaintext.decode()
+        pass
