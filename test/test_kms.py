@@ -1,6 +1,6 @@
 # Copyright (c) Meta, Inc. and its affiliates.
 
-from service.key_management import KeyManagementService
+from enclave.service.key_management import KeyManagementService
 
 
 def test_kms_create_rsa():

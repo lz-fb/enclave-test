@@ -1,10 +1,8 @@
 # Copyright (c) Meta, Inc. and its affiliates.
 
-# To avoid relative import shenanigans this script is in the root directory
-
-from test.test_kms import test_kms_create_rsa
-from test.test_nsm import test_nsm_library_init
-from test.test_odrunner import test_onedocker_init
+from enclave.test.test_kms import test_kms_create_rsa
+from enclave.test.test_nsm import test_nsm_library_init
+from enclave.test.test_odrunner import test_onedocker_init
 
 
 def run_tests():

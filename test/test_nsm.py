@@ -1,6 +1,6 @@
 # Copyright (c) Meta, Inc. and its affiliates.
 
-from gateway import nsm
+from enclave.gateway import nsm
 
 
 def test_nsm_library_init():

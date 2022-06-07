@@ -3,7 +3,7 @@
 from enum import Enum
 
 from Crypto.PublicKey import RSA
-from entity.key_pair_details import KeyPairDetails
+from enclave.entity.key_pair_details import KeyPairDetails
 
 
 class KeyAlgorithm(Enum):
@@ -27,16 +27,16 @@ class KeyManagementService:
             private_key = RSA.generate(key_size)
             public_key = private_key.publickey()
             return KeyPairDetails(
-                private_key.export_key("PEM"),
-                public_key.export_key("PEM"),
+                private_key.export_key("DER"),
+                public_key.export_key("DER"),
             )
         else:
             raise NotImplementedError
 
     def get_public_key(self) -> bytes:
-        """Returns public key as PEM format"""
-        return self.keyPair.public_key_pem()
+        """Returns public key as DER format"""
+        return self.keyPair.public_key
 
     def get_private_key(self) -> bytes:
-        """Returns private key as PEM format"""
-        return self.keyPair.private_key_pem()
+        """Returns private key as DER format"""
+        return self.keyPair.private_key
