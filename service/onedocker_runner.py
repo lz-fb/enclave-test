@@ -4,7 +4,7 @@ from types import ModuleType
 
 from Cryptodome.Cipher import PKCS1_OAEP
 
-from enclave.gateway import NitroGateway
+from enclave.gateway.nsm import NitroGateway
 from enclave.service.key_management import KeyManagementService
 
 
