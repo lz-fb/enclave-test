@@ -5,6 +5,6 @@ FROM amazonlinux
 RUN yum install python3 -y
 RUN python3 -m pip install pycryptodome
 
-COPY . .
+COPY . ./enclave/
 
-CMD ["python3", "run_integration_tests.py"]
+CMD ["python3", "-m", "enclave.run_integration_tests"]
