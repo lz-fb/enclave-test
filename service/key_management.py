@@ -21,14 +21,14 @@ class KeyManagementService:
         self.keyPair = self._generate_key_pair(key_alg, key_size)
 
     def _generate_key_pair(
-        self, key_alg: KeyAlgorithm, key_size: int
+        self, key_alg: KeyAlgorithm, key_size: int, key_format: str = "DER"
     ) -> KeyPairDetails:
         if key_alg == KeyAlgorithm.RSA:
             private_key = RSA.generate(key_size)
             public_key = private_key.publickey()
             return KeyPairDetails(
-                private_key.export_key("DER"),
-                public_key.export_key("DER"),
+                private_key.export_key(key_format),
+                public_key.export_key(key_format),
             )
         else:
             raise NotImplementedError

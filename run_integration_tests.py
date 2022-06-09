@@ -2,13 +2,14 @@
 
 from enclave.test.test_kms import test_kms_create_rsa
 from enclave.test.test_nsm import test_nsm_library_init
-from enclave.test.test_odrunner import test_onedocker_init
+from enclave.test.test_odrunner import test_onedocker_get_att, test_onedocker_init
 
 
 def run_tests():
     test_kms_create_rsa()
     test_nsm_library_init()
     test_onedocker_init()
+    test_onedocker_get_att()
 
 
 if __name__ == "__main__":
