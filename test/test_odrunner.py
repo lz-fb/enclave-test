@@ -13,7 +13,7 @@ def test_onedocker_init():
     print("Onedocker runner service created")
 
 
-def test_onedocker_get_att():
+def test_onedocker_get_att(print_attestation: bool = True):
     """Tests whether Onedocker service can generate attestation document"""
     kms = key_management.KeyManagementService(key_size=2048)
     runner = onedocker_runner.OneDockerRunnerService(kms)
@@ -22,6 +22,11 @@ def test_onedocker_get_att():
 
     # output for testing in local Docker image
     print("Attestation document generated")
+
+    if print_attestation:
+        print("==== Attestation document starts below ====")
+        print(att)
+        print("==== End of attestation document ====")
 
 
 if __name__ == "__main__":
