@@ -50,7 +50,10 @@ class NitroGateway:
         att["certificate"] = self._cert_info(cert)
 
         # Certificate chain
-        att["cabundle"] = [self._cert_info(x) for x in att["cabundle"]]
+        att["cabundle"] = [
+            self._cert_info(crypto.load_certificate(crypto.FILETYPE_ASN1, x))
+            for x in att["cabundle"]
+        ]
 
         # Public key
         public_key = RSA.import_key(att["public_key"])
